@@ -2,9 +2,14 @@ import requests
 import pandas as pd
 from prophet import Prophet
 
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 headers = {
     "x-rapidapi-host": "coinranking1.p.rapidapi.com",
-    "x-rapidapi-key": "7a6c52911cmshde9447769b98a32p131717jsn9dcd86c16ac0",
+    "x-rapidapi-key": os.getenv("RAPIDAPI_KEY"),
 }
 
 

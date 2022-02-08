@@ -7,11 +7,17 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 from stop_words import stop_words_list
 
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+
 # Twitter keys
-consumer_key = "D0iZ9biuoGDMDuBZUrfxAowga"
-consumer_secret = "PtiejTD7NcJ8fpXsbWf69dHvC9fwpvLngwoMy6g87VWw4S9waF"
-access_token = "2636479303-ovMa0OHWBkl3sMqaLSg2TmsIVA7LE2RpF2k3rYw"
-access_token_secret = "SR69xzRTZLtnSoBt866jQtsazp4xtpWQKv9CR7nbO0oKD"
+consumer_key = os.getenv("TWITTTER_CONSUMER_KEY")
+consumer_secret = os.getenv("TWITTTER_CONSUMER_SECRET")
+access_token = os.getenv("TWITTTER_ACCESS_TOKEN")
+access_token_secret = os.getenv("TWITTTER_ACCESS_TOKEN_SECRET")
 
 
 def get_tweets(crypto, symbol):
