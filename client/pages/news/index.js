@@ -25,7 +25,7 @@ export default function News() {
   ];
 
   return (
-    <section>
+    <>
       <Head>
         <title>CryptoPlace - Crypto News</title>
       </Head>
@@ -49,8 +49,12 @@ export default function News() {
             </span>
           ))}
         </div>
-        {!news ? <Loader /> : <CryptoNews newsData={news.value} />}
+        {!news ? (
+          <Loader page={"News"} />
+        ) : (
+          <CryptoNews newsData={news.value} />
+        )}
       </section>
-    </section>
+    </>
   );
 }

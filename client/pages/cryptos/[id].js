@@ -25,7 +25,12 @@ export default function coin() {
   const { data: coinHistory } = useSWR(cryptoHistoryUrl, fetchCoins);
   const coin = coinDetail?.data?.coin;
 
-  if (!coin) return <Loader />;
+  if (!coin)
+    return (
+      <div className="py-8 px-10">
+        <Loader page={"Details"} />
+      </div>
+    );
 
   const periods = ["24h", "7d", "30d", "1y", "5y"];
 

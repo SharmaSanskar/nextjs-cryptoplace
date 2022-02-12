@@ -16,6 +16,8 @@ export default function Authentication() {
     closeModal,
   } = useAuth();
 
+  Modal.setAppElement(document.querySelector("#App"));
+
   const handleLogout = async () => {
     setError("");
     try {

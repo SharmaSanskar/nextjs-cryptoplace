@@ -58,7 +58,7 @@ export default function Sentiment({ uuid }) {
         {result && (
           <>
             <h4 className="font-bold uppercase">Results</h4>
-            <p className="text-rose-500">
+            <p className="text-rose-700 font-bold">
               Note: Does not depict actual prices.
             </p>
             <div className="bg-indigo-50 mt-2">

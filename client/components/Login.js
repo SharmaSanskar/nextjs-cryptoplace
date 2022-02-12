@@ -78,13 +78,8 @@ export default function Login() {
         </div>
       </div>
 
-      <div className="right w-2/5 h-full bg-indigo-500/70 rounded-r-md flex items-center justify-center">
-        <Image
-          className="p-4"
-          src="/login-illustration.svg"
-          width={250}
-          height={250}
-        />
+      <div className="right w-2/5 h-full bg-indigo-500/70 rounded-r-md flex items-center justify-center p-4">
+        <Image src="/login-illustration.svg" width={250} height={250} />
       </div>
     </div>
   );

@@ -37,7 +37,11 @@ export default function Cryptos() {
           className="w-64 py-2 px-4 bg-indigo-50 text-secondary rounded-md font-sans font-bold"
         />
       </div>
-      {!coinsData ? <Loader /> : <Cryptocurrencies coins={coinsData} />}
+      {!coinsData ? (
+        <Loader page={"Cryptocurrencies"} />
+      ) : (
+        <Cryptocurrencies coins={coinsData} />
+      )}
     </section>
   );
 }
