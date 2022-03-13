@@ -10,10 +10,10 @@ const myLoader = ({ src, width, quality }) => {
 
 export default function CryptoNews({ newsData }) {
   return (
-    <div className="grid grid-cols-3 gap-3">
+    <div className="block md:grid md:grid-cols-2 lg:grid-cols-3 gap-3">
       {newsData.map((news, i) => (
         <a key={i} href={news.url} target="_blank" rel="noreferrer">
-          <div className="bg-secondary rounded-md px-4 py-6 hover:shadow-lg flex flex-col justify-between h-full">
+          <div className="w-72 mx-auto md:mx-0 md:w-auto mt-3 md:mb-0 bg-secondary rounded-md px-4 py-6 hover:shadow-lg flex flex-col justify-between h-full">
             <div className="flex">
               <Image
                 loader={myLoader}

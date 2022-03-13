@@ -19,7 +19,7 @@ export default function Sentiment({ crypto, symbol }) {
   };
 
   return (
-    <div className="bg-cyan-600 flex-1 p-3 rounded-md h-fit">
+    <div className="bg-cyan-600 mb-4 md:mb-0 flex-1 p-3 rounded-md h-fit">
       <div>
         <h3 className="text-lg text-indigo-50 font-bold uppercase">
           Sentiment Analysis
@@ -59,8 +59,11 @@ export default function Sentiment({ crypto, symbol }) {
           <>
             <h4 className="font-bold uppercase">Results</h4>
             <p>
-              There has been <b>{result.change}</b> change in sentiment since
-              yesterday.
+              There has been{" "}
+              <span className="underline decoration-double font-bold">
+                {result.change}
+              </span>{" "}
+              change in sentiment since yesterday.
             </p>
             <div className="bg-indigo-50 mt-2">
               <SentimentBar result={result} />

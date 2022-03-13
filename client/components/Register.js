@@ -8,7 +8,7 @@ export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const { register, setModalIsOpen, setIsLoginModal, closeModal } = useAuth();
+  const { register, setIsLoginModal, closeModal } = useAuth();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -22,8 +22,9 @@ export default function Login() {
       setLoading(true);
 
       await register(emailRef.current.value, passwordRef.current.value);
+
       setLoading(false);
-      setModalIsOpen(false);
+      return closeModal();
     } catch (err) {
       setLoading(false);
       return setError(err.message);
@@ -74,7 +75,7 @@ export default function Login() {
             />
           </div>
 
-          {error && <div>{error}</div>}
+          {error && <div className="mb-2">{error}</div>}
 
           <button
             className="px-4 py-1 bg-indigo-500 rounded-md font-bold text-sm text-indigo-50 hover:text-indigo-50/70 hover:bg-indigo-500/70 transition-all"
@@ -96,7 +97,7 @@ export default function Login() {
         </div>
       </div>
 
-      <div className="right w-2/5 h-full bg-indigo-500/70 rounded-r-md flex items-center justify-center p-4">
+      <div className="right hidden md:flex w-2/5 h-full bg-indigo-500/70 rounded-r-md items-center justify-center p-4">
         <Image src="/register-illustration.svg" width={250} height={250} />
       </div>
     </div>

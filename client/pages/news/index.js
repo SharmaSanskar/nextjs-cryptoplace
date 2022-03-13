@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useState } from "react";
 import useSWR from "swr";
 import { CryptoNews, Loader } from "../../components";
-import { fetchNews } from "../../services/newsApi";
+import { fetchNews } from "../../services/newsService";
 
 export default function News() {
   const [newsTerm, setNewsTerm] = useState("Cryptocurrency");
@@ -33,7 +33,7 @@ export default function News() {
         <h1 className="text-2xl font-bold uppercase">
           <span className="border-b-4 border-indigo-400">Crypto</span> News
         </h1>
-        <div className="my-8 flex gap-3">
+        <div className="my-8 flex gap-3 flex-wrap">
           {topics.map((topic, i) => (
             <span
               key={i}

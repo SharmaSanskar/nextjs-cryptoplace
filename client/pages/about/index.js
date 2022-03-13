@@ -27,8 +27,8 @@ export default function Cryptos() {
           <h2 className="text-xl text-indigo-50 font-bold my-4 uppercase">
             What is Cryptocurrency?
           </h2>
-          <div className="flex gap-8 text-indigo-50/70">
-            <div>
+          <div className="lg:flex gap-8 text-indigo-50/70">
+            <div className="mb-6 lg:mb-0">
               <p>
                 A cryptocurrency, crypto-currency, or crypto is a digital
                 currency designed to work as a medium of exchange through a

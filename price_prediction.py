@@ -1,6 +1,8 @@
 import requests
 import pandas as pd
-from prophet import Prophet
+
+# from prophet import Prophet
+from neuralprophet import NeuralProphet
 
 import os
 from dotenv import load_dotenv
@@ -24,16 +26,30 @@ def get_prices(uuid):
     df["ds"] = pd.to_datetime(df["timestamp"], unit="s").dt.date
     df["y"] = pd.to_numeric(df["price"])
     df.drop(["price", "timestamp"], axis=1, inplace=True)
+    # For neural prophet
+    df = df.groupby(["ds"], as_index=False).mean()
     return df
 
 
+# For prophet
+# def PricePrediction(uuid):
+#     price_df = get_prices(uuid)
+#     m = Prophet(daily_seasonality=True)
+#     m.fit(price_df)
+#     future = m.make_future_dataframe(periods=15, include_history=False)
+#     forecast = m.predict(future)
+#     price_list = forecast["yhat"].to_list()
+#     date_list = forecast["ds"].to_list()
+#     return {"prices": price_list, "dates": date_list}
+
+# For neural prophet
 def PricePrediction(uuid):
     price_df = get_prices(uuid)
-    m = Prophet(daily_seasonality=True)
-    m.fit(price_df)
-    future = m.make_future_dataframe(periods=15, include_history=False)
-    forecast = m.predict(future)
-    price_list = forecast["yhat"].to_list()
+    m = NeuralProphet()
+    metrics = m.fit(price_df)
+    future = m.make_future_dataframe(df=price_df, periods=15)
+    forecast = m.predict(df=future)
+    price_list = forecast["yhat1"].to_list()
     date_list = forecast["ds"].to_list()
     return {"prices": price_list, "dates": date_list}
 

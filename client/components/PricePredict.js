@@ -58,8 +58,11 @@ export default function Sentiment({ uuid }) {
         {result && (
           <>
             <h4 className="font-bold uppercase">Results</h4>
-            <p className="text-rose-700 font-bold">
-              Note: Does not depict actual prices.
+            <p>
+              <span className="underline decoration-double font-bold">
+                Note:
+              </span>{" "}
+              Does not depict actual prices.
             </p>
             <div className="bg-indigo-50 mt-2">
               <PredictedChart result={result} />

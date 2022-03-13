@@ -34,17 +34,15 @@ export default function Authentication() {
     right: 0,
     bottom: 0,
     backgroundColor: "rgba(0, 0, 0, 0.7)",
+    zIndex: 20,
   };
 
   if (loggedUser) {
     return (
-      <div className="flex flex-col w-full items-center justify-center">
-        <h4 className="mb-2 text-sm font-bold text-indigo-50 text-center px-4">
-          {loggedUser.name}
-        </h4>
+      <div className="flex w-full items-center justify-end md:justify-center">
         <button
           onClick={handleLogout}
-          className="px-4 py-1 bg-rose-500 rounded-md font-bold text-xs text-indigo-50 hover:text-indigo-50/70 hover:bg-indigo-500/70 transition-all"
+          className="px-4 py-1 bg-rose-500 rounded-md font-bold text-xs text-indigo-50 hover:text-indigo-50/70 hover:bg-rose-500/70 transition-all"
         >
           Logout
         </button>
@@ -54,7 +52,7 @@ export default function Authentication() {
   }
   return (
     <>
-      <div className="flex w-full items-center justify-center">
+      <div className="flex w-full items-center justify-end md:justify-center">
         <button
           onClick={openModal}
           className="px-4 py-1 bg-indigo-500 rounded-md font-bold text-xs text-indigo-50 hover:text-indigo-50/70 hover:bg-indigo-500/70 transition-all"

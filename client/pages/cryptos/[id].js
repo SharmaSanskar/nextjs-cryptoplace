@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import useSWR from "swr";
 import { LineChart, Loader, Sentiment, PricePredict } from "../../components";
-import { fetchCoins } from "../../services/cryptoAPI";
+import { fetchCoins } from "../../services/cryptoService";
 
 const myLoader = ({ src, width, quality }) => {
   return src;
@@ -111,7 +111,7 @@ export default function coin() {
       </h4>
 
       <div className="flex items-center">
-        <h2 className="text-2xl font-bold my-8 uppercase">
+        <h2 className="text-xl md:text-2xl font-bold my-8 uppercase">
           {coin.name} Price Chart
         </h2>
         <select
@@ -131,7 +131,7 @@ export default function coin() {
       <LineChart coinHistory={coinHistory} />
 
       {/* ML */}
-      <div className="flex gap-4 mt-8">
+      <div className="md:flex gap-4 mt-8">
         <Sentiment crypto={coin.name} symbol={coin.symbol} />
         <PricePredict uuid={coin.uuid} />
       </div>
@@ -139,7 +139,7 @@ export default function coin() {
       {/* STATS */}
       <div>
         <h2 className="text-2xl font-bold my-8 uppercase">{coin.name} Stats</h2>
-        <div className="text-indigo-50/70 grid grid-cols-4">
+        <div className="text-indigo-50/70 grid grid-cols-2 md:grid-cols-4">
           {stats.map(({ title, value }, i) => (
             <p key={i} className="border-l-4 pl-4 border-indigo-500 mb-6">
               {title}{" "}

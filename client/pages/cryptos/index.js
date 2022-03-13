@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
 import { Cryptocurrencies, Loader } from "../../components";
-import { fetchCoins } from "../../services/cryptoApi";
+import { fetchCoins } from "../../services/cryptoService";
 
 export default function Cryptos() {
   const [searchTerm, setSearchTerm] = useState("");

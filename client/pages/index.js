@@ -2,8 +2,8 @@ import Head from "next/head";
 import Link from "next/link";
 import useSWR from "swr";
 import { Cryptocurrencies, CryptoStats, CryptoNews } from "../components";
-import { fetchCoins } from "../services/cryptoAPI";
-import { fetchNews } from "../services/newsApi";
+import { fetchCoins } from "../services/cryptoService";
+import { fetchNews } from "../services/newsService";
 
 const cryptoUrl = `https://coinranking1.p.rapidapi.com/coins?limit=4`;
 const newsUrl =
@@ -49,7 +49,7 @@ export default function Home({ coinData, newsData }) {
 
         <section>
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold my-8 uppercase">
+            <h1 className="text-2xl font-bold mt-5 mb-5 md:my-8 uppercase">
               Latest Crypto News
             </h1>
             <Link href="/news">
