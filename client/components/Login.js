@@ -19,6 +19,7 @@ export default function Login() {
       await login(emailRef.current.value, passwordRef.current.value);
 
       setLoading(false);
+
       return closeModal();
     } catch (err) {
       setLoading(false);

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { BiNews, BiBitcoin, BiInfoCircle } from "react-icons/bi";
+import { VscEye } from "react-icons/vsc";
 import Authentication from "./Authentication";
 
 export default function Navbar() {
@@ -44,6 +45,12 @@ export default function Navbar() {
           <a className="md:pl-5 mb-6 flex justify-start items-center hover:text-indigo-50 md:hover:border-r-4 hover:border-indigo-500">
             <BiInfoCircle size={20} className="mr-2" />
             About
+          </a>
+        </Link>
+        <Link href="/watchlist">
+          <a className="md:pl-5 mb-6 flex justify-start items-center hover:text-indigo-50 md:hover:border-r-4 hover:border-indigo-500">
+            <VscEye size={20} className="mr-2" />
+            Watchlist
           </a>
         </Link>
       </nav>

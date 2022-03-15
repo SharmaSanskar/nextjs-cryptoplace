@@ -5,6 +5,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { auth } from "../services/firebaseClient";
+import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
@@ -15,6 +16,7 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const [loggedUser, setLoggedUser] = useState();
+  const [watchlist, setWatchlist] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isLoginModal, setIsLoginModal] = useState(true);
@@ -40,9 +42,65 @@ export const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
+  // REDIS watchlist
+  const getUserwatchlist = async () => {
+    if (loggedUser) {
+      try {
+        const params = new URLSearchParams({ q: loggedUser.uid });
+        const res = await axios.get("/api/userwatchlist?" + params);
+        const { userwatchlist } = res.data;
+        setWatchlist(userwatchlist.watch);
+        return userwatchlist;
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
+  const addtoWatchList = async (uuid) => {
+    try {
+      const data = { userId: loggedUser.uid, crypto: uuid };
+
+      const res = await axios.post("/api/users", JSON.stringify(data), {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      // Update watchlist data
+      await getUserwatchlist();
+
+      console.log(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const removeFromWatchList = async (uuid) => {
+    try {
+      const data = { userId: loggedUser.uid, crypto: uuid };
+
+      const res = await axios.post("/api/removewatch", JSON.stringify(data), {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      // Update watchlist data
+      await getUserwatchlist();
+
+      console.log(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setLoggedUser(user);
+      if (user) {
+        await getUserwatchlist();
+      }
       setLoading(false);
     });
 
@@ -60,6 +118,11 @@ export const AuthProvider = ({ children }) => {
     setIsLoginModal,
     openModal,
     closeModal,
+    setWatchlist,
+    watchlist,
+    getUserwatchlist,
+    addtoWatchList,
+    removeFromWatchList,
   };
 
   return (

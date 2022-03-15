@@ -3,10 +3,12 @@ import HTMLReactParser, { domToReact } from "html-react-parser";
 import millify from "millify";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAuth } from "../../contexts/AuthContext";
 import useSWR from "swr";
 import { LineChart, Loader, Sentiment, PricePredict } from "../../components";
 import { fetchCoins } from "../../services/cryptoService";
+import { BsFillBookmarkPlusFill, BsFillBookmarkDashFill } from "react-icons/bs";
 
 const myLoader = ({ src, width, quality }) => {
   return src;
@@ -14,6 +16,30 @@ const myLoader = ({ src, width, quality }) => {
 
 export default function coin() {
   const [timeperiod, setTimeperiod] = useState("7d");
+
+  // WATCHLIST
+  const {
+    loggedUser,
+    watchlist,
+    removeFromWatchList,
+    addtoWatchList,
+    getUserwatchlist,
+  } = useAuth();
+  const [btnLoading, setBtnLoading] = useState(false);
+
+  const handleAdd = async (uuid, e) => {
+    setBtnLoading(true);
+    e.stopPropagation();
+    await addtoWatchList(uuid);
+    setBtnLoading(false);
+  };
+
+  const handleRemove = async (uuid, e) => {
+    setBtnLoading(true);
+    e.stopPropagation();
+    await removeFromWatchList(uuid);
+    setBtnLoading(false);
+  };
 
   const router = useRouter();
   const { id } = router.query;
@@ -24,6 +50,10 @@ export default function coin() {
   const { data: coinDetail } = useSWR(cryptoUrl, fetchCoins);
   const { data: coinHistory } = useSWR(cryptoHistoryUrl, fetchCoins);
   const coin = coinDetail?.data?.coin;
+
+  useEffect(async () => {
+    await getUserwatchlist();
+  }, []);
 
   if (!coin)
     return (
@@ -109,6 +139,33 @@ export default function coin() {
           ${millify(coin.price)}
         </span>
       </h4>
+
+      {/* WATCHLIST */}
+      <div>
+        {loggedUser ? (
+          watchlist.includes(coin.uuid) ? (
+            <button
+              disabled={btnLoading}
+              onClick={(e) => handleRemove(coin.uuid, e)}
+              className="text-rose-500 flex items-center justify-center bg-indigo-50 rounded-md hover:bg-indigo-50/70 px-3 py-1 mt-4"
+            >
+              <BsFillBookmarkDashFill size={15} className="mr-2" /> Remove from
+              watchlist
+            </button>
+          ) : (
+            <button
+              disabled={btnLoading}
+              onClick={(e) => handleAdd(coin.uuid, e)}
+              className="text-indigo-500 flex items-center justify-center bg-indigo-50 rounded-md hover:bg-indigo-50/70 px-3 py-1 mt-4"
+            >
+              <BsFillBookmarkPlusFill size={15} className="mr-2" /> Add to
+              watchlist
+            </button>
+          )
+        ) : (
+          ""
+        )}
+      </div>
 
       <div className="flex items-center">
         <h2 className="text-xl md:text-2xl font-bold my-8 uppercase">

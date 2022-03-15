@@ -37,7 +37,6 @@ export default function News() {
           {topics.map((topic, i) => (
             <span
               key={i}
-              className="inline-block text-xs w-fit px-2 py-1 rounded-md bg-secondary hover:bg-indigo-400 border-2 border-indigo-500 cursor-pointer"
               className={
                 topic == newsTerm
                   ? "inline-block text-xs w-fit px-2 py-1 rounded-md bg-indigo-400 border-2 border-indigo-500 cursor-pointer"

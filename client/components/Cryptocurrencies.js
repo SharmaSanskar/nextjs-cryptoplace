@@ -1,17 +1,44 @@
 import Image from "next/image";
 import millify from "millify";
 import Link from "next/link";
-import { BsFillBookmarkFill } from "react-icons/bs";
+import {
+  BsFillBookmarkPlusFill,
+  BsFillBookmarkCheckFill,
+} from "react-icons/bs";
+import { useAuth } from "../contexts/AuthContext";
+import { useState, useEffect } from "react";
 
 const myLoader = ({ src, width, quality }) => {
   return src;
 };
 
 export default function Cryptocurrencies({ coins }) {
-  const addtoWatchList = (uuid, e) => {
+  const {
+    loggedUser,
+    watchlist,
+    removeFromWatchList,
+    addtoWatchList,
+    getUserwatchlist,
+  } = useAuth();
+  const [btnLoading, setBtnLoading] = useState(false);
+
+  const handleAdd = async (uuid, e) => {
+    setBtnLoading(true);
     e.stopPropagation();
-    console.log(uuid);
+    await addtoWatchList(uuid);
+    setBtnLoading(false);
   };
+
+  const handleRemove = async (uuid, e) => {
+    setBtnLoading(true);
+    e.stopPropagation();
+    await removeFromWatchList(uuid);
+    setBtnLoading(false);
+  };
+
+  useEffect(async () => {
+    await getUserwatchlist();
+  }, []);
 
   return (
     <div className="block md:grid md:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -21,12 +48,29 @@ export default function Cryptocurrencies({ coins }) {
             <span className="absolute text-7xl text-indigo-50/10 font-black bottom-10 right-10 md:bottom-0 md:right-3">
               {coin.rank}
             </span>
-            <button
-              onClick={(e) => addtoWatchList(coin.uuid, e)}
-              className="absolute right-5 top-5 text-indigo-500 flex items-center justify-center bg-indigo-50 h-5 w-5 rounded-full hover:bg-indigo-50/70"
-            >
-              <BsFillBookmarkFill size={10} />
-            </button>
+
+            {/* WATCHLIST */}
+            {loggedUser ? (
+              watchlist.includes(coin.uuid) ? (
+                <button
+                  disabled={btnLoading}
+                  onClick={(e) => handleRemove(coin.uuid, e)}
+                  className="absolute right-5 top-5 text-emerald-500 flex items-center justify-center bg-indigo-50 h-5 w-5 rounded-full hover:bg-indigo-50/70"
+                >
+                  <BsFillBookmarkCheckFill size={12} />
+                </button>
+              ) : (
+                <button
+                  disabled={btnLoading}
+                  onClick={(e) => handleAdd(coin.uuid, e)}
+                  className="absolute right-5 top-5 text-indigo-500 flex items-center justify-center bg-indigo-50 h-5 w-5 rounded-full hover:bg-indigo-50/70"
+                >
+                  <BsFillBookmarkPlusFill size={12} />
+                </button>
+              )
+            ) : (
+              ""
+            )}
 
             <div className="flex items-center">
               <Image
