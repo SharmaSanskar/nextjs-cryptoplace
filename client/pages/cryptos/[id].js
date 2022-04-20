@@ -10,10 +10,6 @@ import { LineChart, Loader, Sentiment, PricePredict } from "../../components";
 import { fetchCoins } from "../../services/cryptoService";
 import { BsFillBookmarkPlusFill, BsFillBookmarkDashFill } from "react-icons/bs";
 
-const myLoader = ({ src, width, quality }) => {
-  return src;
-};
-
 export default function coin() {
   const [timeperiod, setTimeperiod] = useState("7d");
 
@@ -52,8 +48,10 @@ export default function coin() {
   const coin = coinDetail?.data?.coin;
 
   useEffect(async () => {
-    await getUserwatchlist();
-  }, []);
+    if (watchlist.length == 0) {
+      await getUserwatchlist();
+    }
+  }, [loggedUser]);
 
   if (!coin)
     return (
@@ -123,7 +121,7 @@ export default function coin() {
       </p>
 
       <div className="flex items-center mb-4">
-        <Image loader={myLoader} src={coin.iconUrl} width={30} height={30} />
+        <Image src={coin.iconUrl} width={30} height={30} />
 
         <h1 className="text-3xl font-bold uppercase ml-4">
           {coin.name}{" "}

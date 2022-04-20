@@ -1,12 +1,6 @@
 import Image from "next/image";
 import moment from "moment";
-
-const demoImage =
-  "https://www.bing.com/th?id=OVFT.mpzuVZnv8dwIMRfQGPbOPC&pid=News";
-
-const myLoader = ({ src, width, quality }) => {
-  return src;
-};
+import demoImage from "../public/default-news.jpg";
 
 export default function CryptoNews({ newsData }) {
   return (
@@ -16,7 +10,6 @@ export default function CryptoNews({ newsData }) {
           <div className="w-72 mx-auto md:mx-0 md:w-auto mt-3 md:mb-0 bg-secondary rounded-md px-4 py-6 hover:shadow-lg flex flex-col justify-between h-full">
             <div className="flex">
               <Image
-                loader={myLoader}
                 src={news.image?.thumbnail?.contentUrl || demoImage}
                 width={200}
                 height={200}

@@ -8,10 +8,6 @@ import {
 import { useAuth } from "../contexts/AuthContext";
 import { useState, useEffect } from "react";
 
-const myLoader = ({ src, width, quality }) => {
-  return src;
-};
-
 export default function Cryptocurrencies({ coins }) {
   const {
     loggedUser,
@@ -37,8 +33,10 @@ export default function Cryptocurrencies({ coins }) {
   };
 
   useEffect(async () => {
-    await getUserwatchlist();
-  }, []);
+    if (watchlist.length == 0) {
+      await getUserwatchlist();
+    }
+  }, [loggedUser]);
 
   return (
     <div className="block md:grid md:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -73,12 +71,7 @@ export default function Cryptocurrencies({ coins }) {
             )}
 
             <div className="flex items-center">
-              <Image
-                loader={myLoader}
-                src={coin.iconUrl}
-                width={30}
-                height={30}
-              />
+              <Image src={coin.iconUrl} width={30} height={30} />
               <p className="text-xl ml-3 font-bold">{coin.name}</p>
             </div>
             <div className="py-6 text-indigo-50/70">

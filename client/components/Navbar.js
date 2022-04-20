@@ -41,16 +41,16 @@ export default function Navbar() {
             News
           </a>
         </Link>
-        <Link href="/about">
-          <a className="md:pl-5 mb-6 flex justify-start items-center hover:text-indigo-50 md:hover:border-r-4 hover:border-indigo-500">
-            <BiInfoCircle size={20} className="mr-2" />
-            About
-          </a>
-        </Link>
         <Link href="/watchlist">
           <a className="md:pl-5 mb-6 flex justify-start items-center hover:text-indigo-50 md:hover:border-r-4 hover:border-indigo-500">
             <VscEye size={20} className="mr-2" />
             Watchlist
+          </a>
+        </Link>
+        <Link href="/about">
+          <a className="md:pl-5 mb-6 flex justify-start items-center hover:text-indigo-50 md:hover:border-r-4 hover:border-indigo-500">
+            <BiInfoCircle size={20} className="mr-2" />
+            About
           </a>
         </Link>
       </nav>

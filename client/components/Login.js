@@ -7,7 +7,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { login, closeModal, setIsLoginModal } = useAuth();
+  const { login, closeModal, setIsLoginModal, getUserwatchlist } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,13 +17,10 @@ export default function Login() {
       setLoading(true);
 
       await login(emailRef.current.value, passwordRef.current.value);
-
-      setLoading(false);
-
-      return closeModal();
+      closeModal();
     } catch (err) {
       setLoading(false);
-      return setError(err.message);
+      setError(err.message);
     }
   };
 

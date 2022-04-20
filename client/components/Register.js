@@ -22,12 +22,10 @@ export default function Login() {
       setLoading(true);
 
       await register(emailRef.current.value, passwordRef.current.value);
-
-      setLoading(false);
-      return closeModal();
+      closeModal();
     } catch (err) {
       setLoading(false);
-      return setError(err.message);
+      setError(err.message);
     }
   };
 
