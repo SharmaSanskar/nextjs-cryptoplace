@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  client:
+    build: ./client
+    container_name: client_container
+    ports:
+      - "3000:3000"
+    depends_on:
+      - server
+    stdin_open: true
+    tty: true
+  server:
+    build: ./server
+    container_name: server_container
+    ports:
+      - "5000:5000"

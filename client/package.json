@@ -6,7 +6,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "@alan-ai/alan-sdk-web": "^1.8.30",
     "@auth0/nextjs-auth0": "^1.7.0",
     "axios": "^0.24.0",
     "chart.js": "^3.7.0",

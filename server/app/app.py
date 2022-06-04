@@ -6,6 +6,9 @@ from price_prediction import PricePrediction
 app = Flask(__name__)
 CORS(app)
 
+@app.route("/")
+def index():
+    return "Hello World!"
 
 @app.route("/sentiment", methods=["POST"])
 def analyse_sentiment():
@@ -23,4 +26,4 @@ def predict_price():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=5000)
