@@ -1,6 +1,6 @@
 # CryptoPlace
 
-### __Next.js__ web application providing latest crypto information and crypto news. Also includes machine learning models for sentiment analysis and price prediction.
+### _Next.js_ web application providing latest crypto information and crypto news. Also includes machine learning models with a _Flask_ backend for sentiment analysis and price prediction.
 
 ### MODULE 1: Homepage
 Gets crypto information from __Coinranking API__ and news information from __Bing News API__. Styled using __Tailwind CSS__.   
