@@ -1,6 +1,6 @@
 # CryptoPlace
 
-### _Next.js_ web application providing latest crypto information and crypto news. Also includes machine learning models with a _Flask_ backend for sentiment analysis and price prediction.
+### _Next.js_ web application providing latest crypto information and crypto news. Also includes machine learning models with a _Flask_ and _Redis_ backend for sentiment analysis and price prediction.
 
 ### Docker Images
 [Client Docker Image](https://hub.docker.com/r/sharmasanskar/cryptoplace_client) || [Server Docker Image](https://hub.docker.com/r/sharmasanskar/cryptoplace_server)
