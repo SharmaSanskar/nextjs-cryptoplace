@@ -24,6 +24,19 @@ export default function Login() {
     }
   };
 
+  const guestLogin = async () => {
+    try {
+      setError("");
+      setLoading(true);
+
+      await login("guest@email.com", "guest123");
+      closeModal();
+    } catch (err) {
+      setLoading(false);
+      setError(err.message);
+    }
+  };
+
   return (
     <div className="text-indigo-50 h-full flex">
       <div className="left flex-1 flex flex-col items-start px-10 py-4 h-full justify-center">
@@ -62,6 +75,13 @@ export default function Login() {
             type="submit"
           >
             Login
+          </button>
+          <button
+            className="px-4 py-1 ml-2 bg-indigo-500 rounded-md font-bold text-sm text-indigo-50 hover:text-indigo-50/70 hover:bg-indigo-500/70 transition-all"
+            disabled={loading}
+            onClick={guestLogin}
+          >
+            Guest Login
           </button>
         </form>
 

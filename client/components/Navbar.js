@@ -32,25 +32,25 @@ export default function Navbar() {
         <Link href="/cryptos">
           <a className="md:pl-5 mb-6 flex justify-start items-center hover:text-indigo-50 md:hover:border-r-4 hover:border-indigo-500">
             <BiBitcoin size={20} className="mr-2" />
-            Cryptocurrencies
+            <span className="hidden sm:inline-block">Cryptocurrencies</span>
           </a>
         </Link>
         <Link href="/news">
           <a className="md:pl-5 mb-6 flex justify-start items-center hover:text-indigo-50 md:hover:border-r-4 hover:border-indigo-500">
             <BiNews size={20} className="mr-2" />
-            News
+            <span className="hidden sm:inline-block">News</span>
           </a>
         </Link>
         <Link href="/watchlist">
           <a className="md:pl-5 mb-6 flex justify-start items-center hover:text-indigo-50 md:hover:border-r-4 hover:border-indigo-500">
             <VscEye size={20} className="mr-2" />
-            Watchlist
+            <span className="hidden sm:inline-block">Watchlist</span>
           </a>
         </Link>
         <Link href="/about">
           <a className="md:pl-5 mb-6 flex justify-start items-center hover:text-indigo-50 md:hover:border-r-4 hover:border-indigo-500">
             <BiInfoCircle size={20} className="mr-2" />
-            About
+            <span className="hidden sm:inline-block">About</span>
           </a>
         </Link>
       </nav>
