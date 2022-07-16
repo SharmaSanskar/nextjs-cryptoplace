@@ -49,7 +49,9 @@ export const AuthProvider = ({ children }) => {
         const params = new URLSearchParams({ q: loggedUser.uid });
         const res = await axios.get("/api/userwatchlist?" + params);
         const { userwatchlist } = res.data;
-        setWatchlist(userwatchlist.watch);
+        if (userwatchlist.watch) {
+          setWatchlist(userwatchlist.watch);
+        }
         return userwatchlist;
       } catch (err) {
         console.log(err);

@@ -12,6 +12,6 @@ COPY ./app /server/app
 
 WORKDIR /server/app
 
-EXPOSE 5000
+# EXPOSE 5000
 
 CMD ["python", "app.py"]

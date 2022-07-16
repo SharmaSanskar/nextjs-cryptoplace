@@ -10,9 +10,12 @@ export default function Sentiment({ uuid }) {
 
   const handleClick = async () => {
     setLoading(true);
-    const res = await axios.post("http://localhost:5000/pricepredict", {
-      uuid,
-    });
+    const res = await axios.post(
+      "https://server-cryptoplace.herokuapp.com/api/pricepredict",
+      {
+        uuid,
+      }
+    );
     setLoading(false);
     setResult(res.data);
     console.log(result);

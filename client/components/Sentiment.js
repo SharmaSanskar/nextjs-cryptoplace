@@ -10,10 +10,13 @@ export default function Sentiment({ crypto, symbol }) {
 
   const handleClick = async () => {
     setLoading(true);
-    const res = await axios.post("http://localhost:5000/sentiment", {
-      crypto,
-      symbol,
-    });
+    const res = await axios.post(
+      "https://server-cryptoplace.herokuapp.com/api/sentiment",
+      {
+        crypto,
+        symbol,
+      }
+    );
     setLoading(false);
     setResult(res.data);
   };
